@@ -11,6 +11,7 @@ const API_KEY = 'ddb3385216bdaa24c159055f7b2937a1';
 export default class App extends Component {
   state = {
     city: 'Berlin',
+    cityWeather: null
     loading: false,
   };
 
@@ -22,7 +23,7 @@ export default class App extends Component {
     this.setState({ loading: true });
     fetch(`${BASE_URL}q=${this.state.city}&appid=${API_KEY}`)
       .then(response => response.json())
-      .then(city => this.setState({ city }))
+      .then(cityWeather => this.setState({ cityWeather }))
       .catch(error => console.log(error))
       .finally(() => this.setState({ loading: false }));
   }
