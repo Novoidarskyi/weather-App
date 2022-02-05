@@ -33,7 +33,7 @@ export default class App extends Component {
         this.setState(
           { status: STATUS.RESOLVED },
           this.changeStateCityNameValue(cityWeather),
-          this.changeStateCitWeatherValue(cityWeather),
+          this.changeStateCityWeatherValue(cityWeather),
         ),
       )
       .catch(error =>
@@ -44,7 +44,7 @@ export default class App extends Component {
       );
   };
 
-  changeStateCitWeatherValue = cityWeather =>
+  changeStateCityWeatherValue = cityWeather =>
     this.setState(prevState => ({
       cityWeather: [cityWeather, ...prevState.cityWeather],
     }));
@@ -54,9 +54,22 @@ export default class App extends Component {
       cityName: [name, ...prevState.cityName],
     }));
 
+  updateStateCityWeatherAfterRemove = (removeId, removeCityName) => {
+    const updateArrayCityWeather = this.state.cityWeather.filter(
+      city => city.id !== removeId,
+    );
+    const updateArrayCityName = this.state.cityName.filter(
+      city => city !== removeCityName,
+    );
+    this.setState({
+      cityWeather: updateArrayCityWeather,
+      cityName: updateArrayCityName,
+    });
+  };
+
   render() {
     const { cityWeather, error, status } = this.state;
-    console.log(this.state.cityName);
+    // console.log(this.state.cityName);
     console.log(this.state.cityWeather);
     return (
       <div>
@@ -72,7 +85,12 @@ export default class App extends Component {
         )}
         {status === 'rejected' && <h1>{error.message}</h1>}
         {status === 'resolved' && (
-          <ListCardCityWeather cityWeather={cityWeather} />
+          <ListCardCityWeather
+            cityWeather={cityWeather}
+            updateStateCityWeatherAfterRemove={
+              this.updateStateCityWeatherAfterRemove
+            }
+          />
         )}
       </div>
     );

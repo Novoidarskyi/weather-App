@@ -1,4 +1,4 @@
-function CardCityWeather({name, temp, feelsLike, windSpeed, description }) {
+function CardCityWeather({id, name, temp, feelsLike, windSpeed, description, removeCityWeather }) {
     
   return (
         <div>     
@@ -10,8 +10,8 @@ function CardCityWeather({name, temp, feelsLike, windSpeed, description }) {
             <p>Состояние погоды: {description}</p>
            
       </div> 
-      <button type="button">Обновить</button>
-      <button type="button">Удалить</button>
+      <button type="button" >Обновить</button>
+      <button type="button" onClick={()=>removeCityWeather(id, name)}>Удалить</button>
     </div >
       )
 }
