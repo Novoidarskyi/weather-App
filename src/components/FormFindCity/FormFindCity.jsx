@@ -1,6 +1,6 @@
 import { Component } from 'react';
 
-export default class CityFindForm extends Component {
+export default class FormFindCity extends Component {
   state = {
     cityName: ""
   }
