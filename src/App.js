@@ -1,10 +1,23 @@
 import { Component } from 'react';
+import { Puff } from 'react-loader-spinner';
+import css from 'components/Loader/Loader.module.css';
 import FormFindCity from 'components/FormFindCity';
-import ViewCitiesWeather from 'components/ViewCitiesWeather';
+import ListCardCityWeather from './components/ListCardCityWeather';
+import fetchCity from './api/fetchCity';
+
+const STATUS = {
+  IDLE: 'idle',
+  PENDING: 'pending',
+  RESOLVED: 'resolved',
+  REJECTED: 'rejected',
+};
 
 export default class App extends Component {
   state = {
     cityName: [],
+    cityWeather: [],
+    error: null,
+    status: STATUS.IDLE,
   };
 
   handleFormSubmit = cityName => {
@@ -13,24 +26,54 @@ export default class App extends Component {
         'Информация о погоде данного города уже предоставлена на странице',
       );
     }
-    this.setState(prevState => ({
-      cityName: [cityName, ...prevState.cityName],
-    }));
+
+    this.setState({ status: STATUS.PENDING });
+    fetchCity(cityName)
+      .then(cityWeather =>
+        this.setState(
+          { status: STATUS.RESOLVED },
+          this.changeStateCityNameValue(cityWeather),
+          this.changeStateCitWeatherValue(cityWeather),
+        ),
+      )
+      .catch(error =>
+        this.setState({
+          error,
+          status: STATUS.REJECTED,
+        }),
+      );
   };
 
-  // handleChangeState = cityName => {
+  changeStateCitWeatherValue = cityWeather =>
+    this.setState(prevState => ({
+      cityWeather: [cityWeather, ...prevState.cityWeather],
+    }));
 
-  //   this.setState(prevState => ({
-  //     cityName: [cityName, ...prevState.cityName],
-  //   }));
-  // };
+  changeStateCityNameValue = ({ name }) =>
+    this.setState(prevState => ({
+      cityName: [name, ...prevState.cityName],
+    }));
 
   render() {
+    const { cityWeather, error, status } = this.state;
     console.log(this.state.cityName);
+    console.log(this.state.cityWeather);
     return (
       <div>
         <FormFindCity onSubmit={this.handleFormSubmit} />
-        <ViewCitiesWeather cityName={this.state.cityName} />
+        {status === 'idle' && <div>Введите название города</div>}
+        {status === 'pending' && (
+          <Puff
+            color="#00BFFF"
+            height={150}
+            width={150}
+            className={css.loader}
+          />
+        )}
+        {status === 'rejected' && <h1>{error.message}</h1>}
+        {status === 'resolved' && (
+          <ListCardCityWeather cityWeather={cityWeather} />
+        )}
       </div>
     );
   }

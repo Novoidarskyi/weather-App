@@ -1,13 +1,13 @@
-function CardCityWeather({ cityWeather: {name, main, wind, weather }}) {
+function CardCityWeather({name, temp, feelsLike, windSpeed, description }) {
     
   return (
         <div>     
         <div>
           <h2>{name}</h2>
-            <p>Температура: {main.temp} °C</p>
-            <p>Ощущается как: {main.feels_like} °C</p>
-            <p>Ветер: {wind.speed} м/с</p>
-            <p>Состояние погоды: {weather[0].description}</p>
+            <p>Температура: {temp} °C</p>
+            <p>Ощущается как: {feelsLike} °C</p>
+            <p>Ветер: {windSpeed} м/с</p>
+            <p>Состояние погоды: {description}</p>
            
       </div> 
       <button type="button">Обновить</button>
