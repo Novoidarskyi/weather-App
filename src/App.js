@@ -67,10 +67,18 @@ export default class App extends Component {
     });
   };
 
+  updateStateCityWeatherToOneCity = data => {
+    const result = this.state.cityWeather.reduce((acc, city) => {
+      city.id !== data.id ? acc.push(city) : acc.push(data);
+      return acc;
+    }, []);
+    this.setState({ cityWeather: result });
+  };
+
   render() {
     const { cityWeather, error, status } = this.state;
     // console.log(this.state.cityName);
-    console.log(this.state.cityWeather);
+    // console.log(this.state.cityWeather);
     return (
       <div>
         <FormFindCity onSubmit={this.handleFormSubmit} />
@@ -89,6 +97,9 @@ export default class App extends Component {
             cityWeather={cityWeather}
             updateStateCityWeatherAfterRemove={
               this.updateStateCityWeatherAfterRemove
+            }
+            updateStateCityWeatherToOneCity={
+              this.updateStateCityWeatherToOneCity
             }
           />
         )}

@@ -15,7 +15,7 @@ export default class FormFindCity extends Component {
       alert("Введите название города")
       return
      } 
-
+    
     this.props.onSubmit(this.state.cityName)
     this.setState({cityName: ""})
   }
