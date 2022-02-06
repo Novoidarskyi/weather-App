@@ -10,7 +10,7 @@ function CardCityWeather({id, name, temp, feelsLike, windSpeed, description, rem
            
       </div> 
       <button type="button" onClick={() => updateOneCityWeather(name)}>Обновить</button>
-      <button type="button" onClick={()=>removeCityWeather(id, name)}>Удалить</button>
+      <button type="button" onClick={() => removeCityWeather(id, name)}>Удалить</button>
     </div >
       )
 }

@@ -1,4 +1,3 @@
-import fetchCity from "../../api/fetchCity"
 import CardCityWeather from './CardCityWeather';
 
 function ListCardCityWeather({
@@ -11,11 +10,8 @@ function ListCardCityWeather({
     const removeCityWeather = (removeId, removeCityName) =>
     updateStateCityWeatherAfterRemove(removeId, removeCityName);
  
-  const updateOneCityWeather = (name) => { 
-    fetchCity(name)
-    .then(data => updateStateCityWeatherToOneCity(data))
-
-  }
+  const updateOneCityWeather = (name) => updateStateCityWeatherToOneCity(name)
+ 
 
   return (
     <ul>

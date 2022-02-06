@@ -1,34 +1,32 @@
-import { Component } from 'react';
+import { useState } from 'react';
 
-export default class FormFindCity extends Component {
-  state = {
-    cityName: ""
+function FormFindCity({ onSubmit }) {
+  const [cityName, setCityName] = useState("");
+
+  const handleCityChange = event => { 
+    setCityName(event.currentTarget.value)
   }
 
-  handleCityChange = event => { 
-    this.setState({cityName: event.currentTarget.value})
-  }
-
-  handleSubmit = event => { 
+ const handleSubmit = event => { 
     event.preventDefault()
-    if (this.state.cityName.trim() === "") {
+    if (cityName.trim() === "") {
       alert("Введите название города")
       return
      } 
     
-    this.props.onSubmit(this.state.cityName)
-    this.setState({cityName: ""})
+   onSubmit(cityName)
+    setCityName("")
   }
 
 
-  render() {
+ 
     return (
-      <form onSubmit={this.handleSubmit}>    
+      <form onSubmit={handleSubmit}>    
         <input 
           type="text"
           name="cityName"
-          value={this.state.cityName}
-          onChange={this.handleCityChange}        
+          value={cityName}
+          onChange={handleCityChange}        
         />
         <button type = "submit">
         Добавить город
@@ -36,5 +34,7 @@ export default class FormFindCity extends Component {
 </form>
 
     );
-  }
+  
 }
+
+export default FormFindCity
