@@ -1,15 +1,16 @@
 import { useState, useEffect } from 'react';
 import { Puff } from 'react-loader-spinner';
-import css from 'components/Loader/Loader.module.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { fetchCity, fetchByLocalStorage } from './api/api';
 import FormFindCity from 'components/FormFindCity';
 import ListCardCityWeather from './components/ListCardCityWeather';
-import { fetchCity, fetchByLocalStorage } from './api/api';
+import css from 'components/Loader/Loader.module.css';
 
 const STATUS = {
   IDLE: 'idle',
   PENDING: 'pending',
   RESOLVED: 'resolved',
-  REJECTED: 'rejected',
 };
 
 const useLocalStorage = (key, defaultValue) => {
@@ -38,21 +39,23 @@ function App() {
     );
     if (cityFromLocalStorage.length !== 0) {
       setStatus(STATUS.PENDING);
-      fetchByLocalStorage(cityFromLocalStorage).then(data => {
-        setCityWeather(data);
-        setStatus(STATUS.RESOLVED);
-      });
+      fetchByLocalStorage(cityFromLocalStorage)
+        .then(setCityWeather)
+        .catch(error => {
+          setError(error);
+          toast.error(error.message);
+        })
+        .finally(setStatus(STATUS.RESOLVED));
     }
   }, []);
 
   useEffect(() => {
-    if (cityName.length === 0 && cityWeather.length === 0)
-      setStatus(STATUS.IDLE);
-  }, [cityName.length, cityWeather.length]);
+    if (cityName.length === 0) setStatus(STATUS.IDLE);
+  }, [cityName.length]);
 
   const handleFormSubmit = newCityName => {
     if (cityName.includes(newCityName)) {
-      return alert(
+      return toast.warning(
         'Информация о погоде данного города уже предоставлена на странице',
       );
     }
@@ -62,12 +65,12 @@ function App() {
       .then(data => {
         setCityWeather([data, ...cityWeather]);
         setCityName([data.name, ...cityName]);
-        setStatus(STATUS.RESOLVED);
       })
       .catch(error => {
         setError(error);
-        setStatus(STATUS.REJECTED);
-      });
+        toast.error(error.message);
+      })
+      .finally(setStatus(STATUS.RESOLVED));
   };
 
   const updateStateCityWeatherAfterRemove = (removeId, removeCityName) => {
@@ -87,8 +90,9 @@ function App() {
       )
       .catch(error => {
         setError(error);
-        setStatus(STATUS.REJECTED);
-      });
+        toast.error(error.message);
+      })
+      .finally(setStatus(STATUS.RESOLVED));
   };
 
   console.log(cityName);
@@ -96,12 +100,12 @@ function App() {
   console.log(status);
   return (
     <div>
+      <ToastContainer autoClose={3000} />
       <FormFindCity onSubmit={handleFormSubmit} />
       {status === 'idle' && <div>Введите название города</div>}
       {status === 'pending' && (
         <Puff color="#00BFFF" height={150} width={150} className={css.loader} />
       )}
-      {status === 'rejected' && <h1>{error.message}</h1>}
       {status === 'resolved' && (
         <ListCardCityWeather
           cityWeather={cityWeather}

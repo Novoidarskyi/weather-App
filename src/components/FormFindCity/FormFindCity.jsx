@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 function FormFindCity({ onSubmit }) {
   const [cityName, setCityName] = useState("");
@@ -10,7 +11,7 @@ function FormFindCity({ onSubmit }) {
  const handleSubmit = event => { 
     event.preventDefault()
     if (cityName.trim() === "") {
-      alert("Введите название города")
+      toast.info("Введите название города")
       return
      } 
     
