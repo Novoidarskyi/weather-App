@@ -1,3 +1,4 @@
+
 import CardCityWeather from './CardCityWeather';
 
 function ListCardCityWeather({
@@ -11,12 +12,13 @@ function ListCardCityWeather({
     updateStateCityWeatherAfterRemove(removeId, removeCityName);
  
   const updateOneCityWeather = (name) => updateStateCityWeatherToOneCity(name)
- 
 
+  
+ 
   return (
     <ul>
       {cityWeather.map(({ id, name, main, wind, weather }) => (
-        <li key={id}>
+        <li key={id}>          
           <CardCityWeather
             id={id}
             name={name}
@@ -26,7 +28,7 @@ function ListCardCityWeather({
             description={weather[0].description}
             removeCityWeather={removeCityWeather}
             updateOneCityWeather={updateOneCityWeather }
-          />
+            />            
         </li>
       ))}
     </ul>
