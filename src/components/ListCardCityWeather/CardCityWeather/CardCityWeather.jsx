@@ -1,5 +1,11 @@
 import { Link } from 'react-router-dom';
-function CardCityWeather({ id, name, temp, feelsLike, windSpeed, description, removeCityWeather, updateOneCityWeather }) {
+import { useDispatch } from 'react-redux';
+import {fetchUpdateWeatherOneCity} from 'redux/cityWeather/cityWeather-operations';
+import { remove } from "redux/cityWeather/cityWeather-actions"
+
+
+function CardCityWeather({ id, name, temp, feelsLike, windSpeed, description }) {
+  const dispatch = useDispatch()
   return (
         <div>     
         <div>
@@ -11,8 +17,8 @@ function CardCityWeather({ id, name, temp, feelsLike, windSpeed, description, re
             <p>Состояние погоды: {description}</p>
            </Link>
       </div> 
-      <button type="button" onClick={() => updateOneCityWeather(name)}>Обновить</button>
-      <button type="button" onClick={() => removeCityWeather(id, name)}>Удалить</button>      
+      <button type="button" onClick={() => dispatch(fetchUpdateWeatherOneCity(name))}>Обновить</button>
+      <button type="button" onClick={() => dispatch(remove(id))}>Удалить</button>      
     </div >
       )
 }

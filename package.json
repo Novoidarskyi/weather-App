@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://Novoidarskyi.github.io/weather-app",
   "dependencies": {
+    "@reduxjs/toolkit": "^1.7.2",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
@@ -13,13 +14,15 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-loader-spinner": "^5.1.1",
+    "react-redux": "^7.2.6",
     "react-router-dom": "^6.2.1",
     "react-scripts": "4.0.3",
     "react-toastify": "^8.1.1",
+    "redux": "^4.1.2",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "react-scripts start --open-page weather-app",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

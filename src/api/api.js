@@ -1,6 +1,6 @@
 const BASE_URL =
   'http://api.openweathermap.org/data/2.5/weather?units=metric&lang=ru&';
-const API_KEY = '9c806e9725e96dc347fc3814dca6c4a3';
+const API_KEY = 'ddb3385216bdaa24c159055f7b2937a1';
 
 // Запрос о состоянии погоды в городе
 
@@ -11,7 +11,6 @@ const fetchCity = cityName =>
     }
     return Promise.reject(new Error(`Город с название ${cityName} не найден`));
   });
-
 
 // Запрос о состоянии погоды в город(ах) сохраненных в localStorage
 
@@ -25,4 +24,4 @@ const fetchByLocalStorage = async arrayOfCities => {
   return arrayOfWeather;
 };
 
-export  { fetchCity, fetchByLocalStorage };
+export { fetchCity, fetchByLocalStorage };

@@ -1,22 +1,13 @@
-
+import { useSelector } from 'react-redux';
+import {citiesWeatherArray} from "redux/cityWeather/cityWeather-selectors"
 import CardCityWeather from './CardCityWeather';
 
-function ListCardCityWeather({
-  cityWeather,
-  updateStateCityWeatherAfterRemove, 
-  updateStateCityWeatherToOneCity 
-})
 
-{
-    const removeCityWeather = (removeId, removeCityName) =>
-    updateStateCityWeatherAfterRemove(removeId, removeCityName);
- 
-  const updateOneCityWeather = (name) => updateStateCityWeatherToOneCity(name)
-
-  
+function ListCardCityWeather(){
+const cityWeather = useSelector(citiesWeatherArray)
  
   return (
-    <ul>
+    cityWeather.length > 0 && (<ul>
       {cityWeather.map(({ id, name, main, wind, weather }) => (
         <li key={id}>          
           <CardCityWeather
@@ -25,13 +16,11 @@ function ListCardCityWeather({
             temp={main.temp}
             feelsLike={main.feels_like}
             windSpeed={wind.speed}
-            description={weather[0].description}
-            removeCityWeather={removeCityWeather}
-            updateOneCityWeather={updateOneCityWeather }
+            description={weather[0].description}       
             />            
         </li>
       ))}
-    </ul>
+    </ul>)
   );
 }
 
