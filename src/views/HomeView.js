@@ -7,11 +7,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
   fetchOneCityWeather,
   fetchCityWeatherFromLocalStorage,
-} from '../redux/cityWeather/cityWeather-operations';
+} from 'redux/cityWeather/cityWeather-operations';
 import {
   citiesWeatherArray,
   isLoading,
-} from '../redux/cityWeather/cityWeather-selectors';
+} from 'redux/cityWeather/cityWeather-selectors';
 import useLocalStorage from 'hooks/useLocalStorage';
 import FormFindCity from 'components/FormFindCity';
 import ListCardCityWeather from 'components/ListCardCityWeather';
@@ -22,6 +22,7 @@ function HomeView() {
   const loading = useSelector(isLoading);
   const dispatch = useDispatch();
 
+  //Обновление state по списку городов из LocalStorage
   useEffect(() => {
     const cityFromLocalStorage = JSON.parse(
       window.localStorage.getItem('cities'),
@@ -30,6 +31,13 @@ function HomeView() {
       dispatch(fetchCityWeatherFromLocalStorage(cityFromLocalStorage));
     }
   }, [dispatch]);
+
+  //Обновление state городов при добавлениии нового города
+  useEffect(() => {
+    setCityName(cityWeather.map(city => city.name));
+  }, [cityWeather, setCityName]);
+
+  // Запрос о состоянии погоды в городе при Submit формы
 
   const handleFormSubmit = newCityName => {
     if (cityName.includes(newCityName)) {
@@ -40,18 +48,11 @@ function HomeView() {
     dispatch(fetchOneCityWeather(newCityName));
   };
 
-  useEffect(() => {
-    if (cityWeather.length !== 0) {
-      setCityName(cityWeather.map(city => city.name));
-    }
-  }, [cityWeather, setCityName]);
-
   return (
     <div>
       <ToastContainer autoClose={3000} />
       <FormFindCity onSubmit={handleFormSubmit} />
       <ListCardCityWeather />
-      {cityWeather.length === 0 && <div>Введите название города</div>}
       {loading && (
         <Puff color="#00BFFF" height={150} width={150} className={css.loader} />
       )}

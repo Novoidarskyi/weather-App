@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import {fetchUpdateWeatherOneCity} from 'redux/cityWeather/cityWeather-operations';
 import { remove } from "redux/cityWeather/cityWeather-actions"
+import PropTypes from 'prop-types';
 
 
 function CardCityWeather({ id, name, temp, feelsLike, windSpeed, description }) {
@@ -25,3 +26,14 @@ function CardCityWeather({ id, name, temp, feelsLike, windSpeed, description }) 
 
   
 export default CardCityWeather
+
+
+
+CardCityWeather.propTypes = {
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  temp: PropTypes.number.isRequired,
+  feelsLike: PropTypes.number.isRequired,
+  windSpeed: PropTypes.number.isRequired,
+  description: PropTypes.string.isRequired,
+}

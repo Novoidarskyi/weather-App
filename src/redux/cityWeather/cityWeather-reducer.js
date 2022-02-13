@@ -1,4 +1,5 @@
 import { createReducer, combineReducers } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
 import {
   fetchOneCityWeather,
   fetchUpdateWeatherOneCity,
@@ -21,13 +22,10 @@ const isLoading = createReducer(false, {
   [fetchOneCityWeather.pending]: () => true,
   [fetchOneCityWeather.fulfilled]: () => false,
   [fetchOneCityWeather.rejected]: () => false,
-  [fetchCityWeatherFromLocalStorage.pending]: () => true,
-  [fetchCityWeatherFromLocalStorage.fulfilled]: () => false,
-  [fetchCityWeatherFromLocalStorage.rejected]: () => false,
 });
 
 const error = createReducer(null, {
-  [fetchOneCityWeather.rejected]: (_, { payload }) => payload,
+  [fetchOneCityWeather.rejected]: (_, { payload }) => toast.error(payload),
   [fetchUpdateWeatherOneCity.rejected]: (_, { payload }) => payload,
   [fetchCityWeatherFromLocalStorage.rejected]: (_, { payload }) => payload,
 });

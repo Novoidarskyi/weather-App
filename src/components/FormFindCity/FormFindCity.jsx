@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { toast } from 'react-toastify';
+import PropTypes from 'prop-types';
 
 function FormFindCity({ onSubmit }) {
   const [cityName, setCityName] = useState("");
@@ -18,8 +19,6 @@ function FormFindCity({ onSubmit }) {
    onSubmit(cityName)
     setCityName("")
   }
-
-
  
     return (
       <form onSubmit={handleSubmit}>    
@@ -27,15 +26,19 @@ function FormFindCity({ onSubmit }) {
           type="text"
           name="cityName"
           value={cityName}
+          placeholder = "Введите название города"
           onChange={handleCityChange}        
         />
         <button type = "submit">
         Добавить город
         </button>
 </form>
-
     );
   
 }
 
 export default FormFindCity
+
+FormFindCity.propTypes = {
+  onSubmit: PropTypes.func.isRequired
+}

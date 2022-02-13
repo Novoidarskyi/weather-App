@@ -1,7 +1,11 @@
 import { Chart } from 'chart.js/auto';
 import { Line } from 'react-chartjs-2';
+import PropTypes from 'prop-types';
 
 const ChartTemp = ({ value }) => {
+
+  // Формирование массива значений часов для подписи горизонтальной оси графика
+
   const hours = value.reduce((acc, _, index) => {
     if (String(index).length === 2) {
       acc.push(`${index}:00`);
@@ -12,6 +16,8 @@ const ChartTemp = ({ value }) => {
     return acc;
   }, []);
 
+   // Формирование массива значений температур для отрисовки графика
+  
   const dataTemp = value.map(item => item.temp);
 
   const lineChartData = {
@@ -41,7 +47,7 @@ const ChartTemp = ({ value }) => {
       },
       title: {
         display: true,
-        text: 'Суточная температура, t°C',
+        text: 'Суточная температура, °C',
         fontSize: '40px',
         color: 'black',
       },
@@ -53,3 +59,8 @@ const ChartTemp = ({ value }) => {
   );
 };
 export default ChartTemp;
+
+ChartTemp.propTypes = {
+  value: PropTypes.arrayOf(PropTypes.object).isRequired
+}
+

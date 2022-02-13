@@ -1,5 +1,4 @@
 import { Routes, Route } from 'react-router-dom';
-
 import HomeView from './views/HomeView';
 import DetailWeatherCity from './views/DetailWeatherCity';
 

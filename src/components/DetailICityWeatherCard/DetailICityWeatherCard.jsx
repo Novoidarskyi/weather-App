@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 const windDirection = data => {
   if (data === 360) {
     return 'северный';
@@ -26,7 +28,9 @@ function DetailWeatherCity({ city }) {
     wind: { speed, deg },
     main: { temp, feels_like, humidity, pressure, temp_max, temp_min },
   } = city;
+  
   const windDir = windDirection(deg);
+  
   return (
     <div>
       <h2>{name}</h2>
@@ -44,3 +48,7 @@ function DetailWeatherCity({ city }) {
 }
 
 export default DetailWeatherCity;
+
+DetailWeatherCity.propTypes = {
+  city: PropTypes.object.isRequired
+}

@@ -2,9 +2,11 @@ const BASE_URL =
   'http://api.openweathermap.org/data/2.5/weather?units=metric&lang=ru&';
 const TEMP_URL =
   'https://api.openweathermap.org/data/2.5/onecall?units=metric&exclude=current,minutely,daily,alerts&';
-const API_KEY = 'ddb3385216bdaa24c159055f7b2937a1';
+const ID_URL =
+  'http://api.openweathermap.org/data/2.5/weather?units=metric&lang=ru&';
+const API_KEY = 'c16e47f23c97143fbd5f7a2cbadb0b2f';
 
-// Запрос о состоянии погоды в городе
+// Запрос о состоянии погоды в городе по названию
 
 const fetchCity = cityName =>
   fetch(`${BASE_URL}q=${cityName}&appid=${API_KEY}`).then(response => {
@@ -12,6 +14,18 @@ const fetchCity = cityName =>
       return response.json();
     }
     return Promise.reject(new Error(`Город с название ${cityName} не найден`));
+  });
+
+// Запрос о состоянии погоды в городе по ID
+
+const fetchCityById = id =>
+  fetch(`${ID_URL}id=${id}&appid=${API_KEY}`).then(response => {
+    if (response.ok) {
+      return response.json();
+    }
+    return Promise.reject(
+      new Error('Подробная информация о погоде не найдена'),
+    );
   });
 
 // Запрос о состоянии погоды в город(ах) сохраненных в localStorage
@@ -36,4 +50,4 @@ const fetchTemperature = (lat, lon) =>
     return Promise.reject(new Error(`Данные о температуре не найдены`));
   });
 
-export { fetchCity, fetchByLocalStorage, fetchTemperature };
+export { fetchCity, fetchByLocalStorage, fetchTemperature, fetchCityById };
