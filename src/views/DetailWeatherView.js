@@ -2,11 +2,13 @@ import { toast } from 'react-toastify';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import Button from '@mui/material/Button';
 import { fetchTemperature, fetchCityById } from 'api/api';
 import { citiesWeatherArray } from 'redux/cityWeather/cityWeather-selectors';
 import DetailICityWeatherCard from 'components/DetailICityWeatherCard';
 import ChartTemperature from 'components/ChartTemperature';
 import GoBackButton from 'components/GoBackButton';
+import css from 'css/common.module.css';
 
 function DetailWeatherCity() {
   const [temp, setTemp] = useState([]);
@@ -15,6 +17,7 @@ function DetailWeatherCity() {
   const [allCitiesWeather, setAllCitiesWeather] = useState([]);
   const { cityId } = useParams();
 
+  console.log(temp);
   // Запрос на погоду города по ID при загрузке страницы не из главной
   useEffect(() => {
     if (weatherCitiesFromRedux.length === 0 && allCitiesWeather.length === 0)
@@ -39,22 +42,30 @@ function DetailWeatherCity() {
   const tempOfDayArray = temp.length !== 0 ? temp.hourly.slice(0, 24) : [];
 
   return (
-    <div>
+    <>
       <GoBackButton />
-      {city && city.length !== 0 && <DetailICityWeatherCard city={city} />}
-      {visible && (
-        <button
-          type="button"
-          onClick={() => {
-            detailTemp(city);
-            setVisible(!visible);
-          }}
-        >
-          Подробный прогноз t°C
-        </button>
-      )}
+      <div className={css.wrapper}>
+        {city && city.length !== 0 && <DetailICityWeatherCard city={city} />}
+        {visible && (
+          <Button
+            variant="outlined"
+            type="button"
+            sx={{
+              color: 'white',
+              border: '1px solid white',
+              mt: '10px',
+            }}
+            onClick={() => {
+              detailTemp(city);
+              setVisible(!visible);
+            }}
+          >
+            Подробный прогноз температуры (°C)
+          </Button>
+        )}
+      </div>
       {!visible && <ChartTemperature value={tempOfDayArray} />}
-    </div>
+    </>
   );
 }
 

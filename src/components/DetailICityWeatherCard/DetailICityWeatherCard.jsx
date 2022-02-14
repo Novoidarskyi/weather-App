@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import css from './DetailICityWeatherCard.module.css';
 
 const windDirection = data => {
   if (data === 360) {
@@ -33,16 +34,18 @@ function DetailWeatherCity({ city }) {
   
   return (
     <div>
-      <h2>{name}</h2>
-      <p>Температура: {temp} °C</p>
-      <p>Ощущается как: {feels_like} °C</p>
-      <p>Ветер: {speed} м/с ({windDir})</p>
-      <p>Влажность: {humidity}%</p>
-      <p>Давление: {pressure} мм рт. ст.</p>
-      <p>Видимость: {visibility} м</p>
-      <p>Состояние погоды: {weather[0].description}</p>
-      <p>Максимальная температура: {temp_max}°C</p>
-      <p>Минимальная температура: {temp_min}°C</p>
+      <h2 className={css.title}>{name}</h2>
+      <ul className={css.list}>
+      <li className={css.item_text}>Температура: {temp} °C</li>
+      <li className={css.item_text}>Ощущается как: {feels_like} °C</li>
+      <li className={css.item_text}>Ветер: {speed} м/с ({windDir})</li>
+      <li className={css.item_text}>Влажность: {humidity}%</li>
+      <li className={css.item_text}>Давление: {pressure} мм рт. ст.</li>
+      <li className={css.item_text}>Видимость: {visibility} м</li>
+            <li className={css.item_text}>Максимальная температура: {temp_max} °C</li>
+      <li className={css.item_text}>Минимальная температура: {temp_min} °C</li>
+      <li className={css.item_text}>Состояние погоды: {weather[0].description}</li>
+    </ul>
     </div>
   );
 }
@@ -52,3 +55,4 @@ export default DetailWeatherCity;
 DetailWeatherCity.propTypes = {
   city: PropTypes.object.isRequired
 }
+

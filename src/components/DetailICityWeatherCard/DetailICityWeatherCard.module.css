@@ -1,0 +1,29 @@
+.title {
+  color: #fff;
+  text-align: center;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 1.5;
+}
+
+.list {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.item_text {
+  color: #fff;
+  text-align: center;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 1.4;
+  flex-basis: calc((100% - 32px) / 4);
+}
+
+.item_text:not(:last-child) {
+  margin-bottom: 10px;
+}

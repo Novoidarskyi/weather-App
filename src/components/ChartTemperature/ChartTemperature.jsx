@@ -3,7 +3,6 @@ import { Line } from 'react-chartjs-2';
 import PropTypes from 'prop-types';
 
 const ChartTemp = ({ value }) => {
-
   // Формирование массива значений часов для подписи горизонтальной оси графика
 
   const hours = value.reduce((acc, _, index) => {
@@ -16,8 +15,8 @@ const ChartTemp = ({ value }) => {
     return acc;
   }, []);
 
-   // Формирование массива значений температур для отрисовки графика
-  
+  // Формирование массива значений температур для отрисовки графика
+
   const dataTemp = value.map(item => item.temp);
 
   const lineChartData = {
@@ -25,12 +24,12 @@ const ChartTemp = ({ value }) => {
     datasets: [
       {
         data: dataTemp,
-        borderColor: '#3333ff',
+        borderColor: 'white',
         fill: false,
         label: 't°C',
         lineTension: 0.5,
         pointBorderColor: 'white',
-        pointBackgroundColor: 'blue',
+        pointBackgroundColor: 'grey',
         pointRadius: 7,
         pointHoverRadius: 15,
         pointBorderWidth: 2,
@@ -40,7 +39,7 @@ const ChartTemp = ({ value }) => {
 
   const options = {
     responsive: true,
-    plugins: {
+        plugins: {      
       legend: {
         display: false,
         position: 'top',
@@ -48,10 +47,22 @@ const ChartTemp = ({ value }) => {
       title: {
         display: true,
         text: 'Суточная температура, °C',
-        fontSize: '40px',
-        color: 'black',
-      },
+        font: {
+          size: 20,
+        },
+        color: 'white',
+      },   
     },
+     scales: {
+    xAxis: {
+         ticks: { color: "white" },
+         grid: {display: false}
+       },
+       yAxis: {
+        ticks: {color: "white"},
+        grid: {display: false}
+      }
+  }
   };
 
   return (
@@ -61,6 +72,5 @@ const ChartTemp = ({ value }) => {
 export default ChartTemp;
 
 ChartTemp.propTypes = {
-  value: PropTypes.arrayOf(PropTypes.object).isRequired
-}
-
+  value: PropTypes.arrayOf(PropTypes.object).isRequired,
+};

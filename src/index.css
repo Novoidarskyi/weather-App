@@ -42,7 +42,7 @@ img {
 }
 
 .backgroundImage {
-  background-image: url('../src/images/3.jpg');
+  background-image: url('../src/images/backgroundImage.jpg');
   background-repeat: no-repeat;
   background-size: cover;
 }
