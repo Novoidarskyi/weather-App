@@ -10,7 +10,7 @@ function FormFindCity({ onSubmit }) {
     setCityName(event.currentTarget.value)
   }
 
-  const normalizeCityName = cityName.slice(0, 1).toUpperCase() + cityName.slice(1)
+  const normalizeCityName = cityName.slice(0, 1).toUpperCase() + cityName.slice(1).toLocaleLowerCase()
  const handleSubmit = event => { 
     event.preventDefault()
     if (cityName.trim() === "") {
