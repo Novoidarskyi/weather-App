@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 const GoBackButton = () => {
   const navigate = useNavigate();
    const handleGoBack = () => {
-    navigate('/weather-app');
+    navigate('/');
   };
   return (
     <>

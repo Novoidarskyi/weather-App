@@ -6,11 +6,8 @@ import DetailWeatherView from './views/DetailWeatherView';
 function App() {
   return (
     <Routes>
-      <Route exact path="/weather-app/" element={<HomeView />}></Route>
-      <Route
-        path="/weather-app/:cityId"
-        element={<DetailWeatherView />}
-      ></Route>
+      <Route exact path="/" element={<HomeView />}></Route>
+      <Route path="/:cityId" element={<DetailWeatherView />}></Route>
     </Routes>
   );
 }

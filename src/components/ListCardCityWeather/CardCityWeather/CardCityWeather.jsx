@@ -17,7 +17,7 @@ function CardCityWeather({
   const dispatch = useDispatch();
   return (
     <div>
-      <NavLink to={`${id}`}>
+      <NavLink to={`/${id}`}>
         <h2 className={css.title}>{name}</h2>
         <p className={css.item_text}>Температура: {temp} °C</p>
         <p className={css.item_text}>Ощущается как: {feelsLike} °C</p>

@@ -1,9 +1,9 @@
 const BASE_URL =
-  'http://api.openweathermap.org/data/2.5/weather?units=metric&lang=ru&';
+  'https://api.openweathermap.org/data/2.5/weather?units=metric&lang=ru&';
 const TEMP_URL =
   'https://api.openweathermap.org/data/2.5/onecall?units=metric&exclude=current,minutely,daily,alerts&';
 const ID_URL =
-  'http://api.openweathermap.org/data/2.5/weather?units=metric&lang=ru&';
+  'https://api.openweathermap.org/data/2.5/weather?units=metric&lang=ru&';
 const API_KEY = 'c16e47f23c97143fbd5f7a2cbadb0b2f';
 
 // Запрос о состоянии погоды в городе по названию
