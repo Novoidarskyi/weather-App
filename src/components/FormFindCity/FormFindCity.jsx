@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import PropTypes from 'prop-types';
+import css from './FormFindCity.module.css';
 
 function FormFindCity({ onSubmit }) {
   const [cityName, setCityName] = useState("");
@@ -9,6 +10,7 @@ function FormFindCity({ onSubmit }) {
     setCityName(event.currentTarget.value)
   }
 
+  const normalizeCityName = cityName.slice(0, 1).toUpperCase() + cityName.slice(1)
  const handleSubmit = event => { 
     event.preventDefault()
     if (cityName.trim() === "") {
@@ -16,23 +18,26 @@ function FormFindCity({ onSubmit }) {
       return
      } 
     
-   onSubmit(cityName)
+      onSubmit(normalizeCityName)
     setCityName("")
   }
  
     return (
-      <form onSubmit={handleSubmit}>    
-        <input 
+      <header className={css.searchbar}>
+      <form className={css.searchForm}  onSubmit={handleSubmit}>    
+        <input className={css.searchFormInput} 
           type="text"
-          name="cityName"
+          name="cityName"          
+          autoFocus
           value={cityName}
           placeholder = "Введите название города"
           onChange={handleCityChange}        
-        />
-        <button type = "submit">
+          />   
+        <button type = "submit" className={css.searchFormButton}>
         Добавить город
-        </button>
+        </button>  
 </form>
+</header>
     );
   
 }

@@ -4,6 +4,9 @@
   "private": true,
   "homepage": "https://Novoidarskyi.github.io/weather-app",
   "dependencies": {
+    "@emotion/react": "^11.7.1",
+    "@emotion/styled": "^11.6.0",
+    "@mui/material": "^5.4.1",
     "@reduxjs/toolkit": "^1.7.2",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
@@ -15,10 +18,10 @@
     "react": "^17.0.2",
     "react-chartjs-2": "^4.0.1",
     "react-dom": "^17.0.2",
-    "react-loader-spinner": "^5.1.1",
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.2.1",
     "react-scripts": "4.0.3",
+    "react-spinners": "^0.11.0",
     "react-toastify": "^8.1.1",
     "redux": "^4.1.2",
     "web-vitals": "^1.1.2"

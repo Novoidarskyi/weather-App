@@ -1,0 +1,21 @@
+.title {
+  color: #fff;
+  text-align: center;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 1.5;
+}
+
+.item_text {
+  color: #fff;
+  text-align: left;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.button_wrapper {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+}

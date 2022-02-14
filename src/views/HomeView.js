@@ -1,7 +1,6 @@
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Puff } from 'react-loader-spinner';
-import css from 'components/Loader/Loader.module.css';
+import CircleLoader from 'react-spinners/CircleLoader';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -15,6 +14,7 @@ import {
 import useLocalStorage from 'hooks/useLocalStorage';
 import FormFindCity from 'components/FormFindCity';
 import ListCardCityWeather from 'components/ListCardCityWeather';
+import s from '../css/common.module.css';
 
 function HomeView() {
   const [cityName, setCityName] = useLocalStorage('cities', []);
@@ -49,14 +49,24 @@ function HomeView() {
   };
 
   return (
-    <div>
-      <ToastContainer autoClose={3000} />
+    <>
+      <ToastContainer autoClose={1500} />
       <FormFindCity onSubmit={handleFormSubmit} />
-      <ListCardCityWeather />
       {loading && (
-        <Puff color="#00BFFF" height={150} width={150} className={css.loader} />
+        <CircleLoader
+          color="white"
+          size={150}
+          css={`
+            position: fixed;
+            top: 50%;
+            left: 50%;
+          `}
+        />
       )}
-    </div>
+      <div className={s.container}>
+        <ListCardCityWeather />
+      </div>
+    </>
   );
 }
 
